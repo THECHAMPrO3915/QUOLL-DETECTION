@@ -1,0 +1,8 @@
+streamlit
+streamlit-webrtc
+ultralytics
+timm
+torchvision
+torch --index-url https://pytorch.org
+Pillow
+opencv-python-headless
