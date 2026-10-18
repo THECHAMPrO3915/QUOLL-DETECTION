@@ -1,3 +1,4 @@
+opencv-python-headless
 streamlit
 streamlit-webrtc
 ultralytics
@@ -5,4 +6,3 @@ timm
 torchvision
 torch
 Pillow
-opencv-python-headless
