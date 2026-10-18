@@ -26,10 +26,9 @@ def load_models():
     # --- AUTOMATED CLOUD DOWNLOADER ---
     CLASSIFIER_FILENAME = "awc-135-v1.pth"
     if not os.path.exists(CLASSIFIER_FILENAME):
-        with st.spinner("Downloading Quoll Classifier Weights... This may take a moment."):
-            # TODO: Replace this placeholder link with your actual direct download URL 
-            # for the .pth weights file (e.g., from a GitHub Release or Hugging Face)
-            awc_url = "YOUR_DIRECT_DOWNLOAD_URL_TO_PTH_FILE"
+        with st.spinner("Downloading Quoll Classifier Weights from Cloud Storage (~110MB)... This may take a moment."):
+            # Direct download URL for awc-135-v1.pth 
+            awc_url = "https://huggingface.co/Addax-Data-Science/AWC135-AWC-v1/resolve/main/awc-135-v1.pth"
             urllib.request.urlretrieve(awc_url, CLASSIFIER_FILENAME)
             st.success("Download Complete!")
 
@@ -110,7 +109,7 @@ class WildlifeVideoTransformer(VideoTransformerBase):
 # ==========================================
 # WEB USER INTERFACE STYLING
 # ==========================================
-col1, col2 = st.columns(2)  # Fixed missing argument
+col1, col2 = st.columns(2)
 
 with col1:
     st.markdown("#### Live Analysis Feed")
