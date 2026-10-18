@@ -24,12 +24,12 @@ RTC_CONFIG = RTCConfiguration(
 @st.cache_resource
 def load_models():
     # --- AUTOMATED CLOUD DOWNLOADER ---
-    # Overrides manual heavy weight uploads. If the file isn't found on Render, it downloads it directly.
     CLASSIFIER_FILENAME = "awc-135-v1.pth"
     if not os.path.exists(CLASSIFIER_FILENAME):
-        with st.spinner("Downloading Quoll Classifier Weights from AWC Servers (~110MB)... This may take a moment."):
-            # Official direct Australian Wildlife Conservancy release link
-            awc_url = "https://github.com"
+        with st.spinner("Downloading Quoll Classifier Weights... This may take a moment."):
+            # TODO: Replace this placeholder link with your actual direct download URL 
+            # for the .pth weights file (e.g., from a GitHub Release or Hugging Face)
+            awc_url = "YOUR_DIRECT_DOWNLOAD_URL_TO_PTH_FILE"
             urllib.request.urlretrieve(awc_url, CLASSIFIER_FILENAME)
             st.success("Download Complete!")
 
@@ -65,13 +65,13 @@ class WildlifeVideoTransformer(VideoTransformerBase):
         
         results_list = detector(pil_img, verbose=False)
         
-        if len(results_list) > 0 and results_list.boxes is not None:
-            for box in results_list.boxes:
+        if len(results_list) > 0 and results_list[0].boxes is not None:
+            for box in results_list[0].boxes:
                 conf = box.conf.item()
                 cls_id = int(box.cls.item())
                 
                 if conf > 0.45:
-                    x1, y1, x2, y2 = map(int, box.xyxy.tolist())
+                    x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
                     is_human = (cls_id == 0)
                     is_yolo_animal = (14 <= cls_id <= 23)
                     
@@ -110,7 +110,7 @@ class WildlifeVideoTransformer(VideoTransformerBase):
 # ==========================================
 # WEB USER INTERFACE STYLING
 # ==========================================
-col1, col2 = st.columns()
+col1, col2 = st.columns(2)  # Fixed missing argument
 
 with col1:
     st.markdown("#### Live Analysis Feed")
