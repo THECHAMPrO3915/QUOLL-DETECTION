@@ -18,7 +18,7 @@ st.markdown("### Field Agent Deployment Web Console")
 
 # Routes the video connection smoothly over public internet firewalls
 RTC_CONFIG = RTCConfiguration(
-    {"iceServers": [{"urls": ["stun:://google.com"]}]}
+    {"iceServers": [{"urls": ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302"]}]}
 )
 
 @st.cache_resource
